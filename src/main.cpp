@@ -14,20 +14,7 @@ ESP8266WebServer server(80);
 
 int debbug_level = 0;
 
-void setup() {
-  //Setup via AP
-  Serial.begin(115200);
-  delay(10);
-  //Check if already connected to a Wifi
-  if(WiFi.status()==WL_CONNECTED){
-    if(debbug_level>=1){
-      Serial.println("Already connected");
-      Serial.print("Connectet IP: ");
-      Serial.println(WiFi.localIP());
-    }
-    return;
-  }
-
+void APSetup(){
   if(debbug_level>=1){
       Serial.println("Starting access point");
     }
@@ -76,7 +63,24 @@ void setup() {
 
 }
 
+void setup() {
+  //Setup via AP
+  Serial.begin(115200);
+  delay(10);
+  //Check if already connected to a Wifi
+  if(WiFi.status()==WL_CONNECTED){
+    if(debbug_level>=1){
+      Serial.println("Already connected");
+      Serial.print("Connectet IP: ");
+      Serial.println(WiFi.localIP());
+    }
+    return;
+  }
+
+  APSetup();
+
+}
+
 void loop() {
   server.handleClient();
-  // put your main code here, to run repeatedly:
 }
