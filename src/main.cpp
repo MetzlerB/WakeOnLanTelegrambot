@@ -29,6 +29,14 @@ void setup() {
   }
 
   if(debbug_level>=1){
+      Serial.println("Starting access point");
+    }
+  //Start AP mode
+  WiFi.mode(WIFI_AP);
+  WiFi.softAPConfig(apIP, apIP,IPAddress(255,255,255,0));
+  WiFi.softAP(apSSID,apPassword);
+
+  if(debbug_level>=1){
       Serial.print("AP IP: ");
       Serial.println(WiFi.softAPIP());
     }
